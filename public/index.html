@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Repo Analyst</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Repo Analyst</h1>
+    <div id="meter" class="meter" hidden>
+      <label for="meter-bar" id="meter-text">Neurons today</label>
+      <progress id="meter-bar" max="1" value="0"></progress>
+    </div>
+    <span id="conn" class="conn" role="status">connecting…</span>
+  </header>
+
+  <div id="banner" class="banner" hidden></div>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <form id="new-run" class="card" autocomplete="off">
+        <h2>New run</h2>
+        <label>Owner
+          <input name="owner" required maxlength="100" placeholder="octocat"
+                 pattern="[A-Za-z0-9_.\-]+">
+        </label>
+        <label>Repository
+          <input name="repo" required maxlength="100" placeholder="hello-world"
+                 pattern="[A-Za-z0-9_.\-]+">
+        </label>
+        <label>Ref <span class="hint">(optional, default branch)</span>
+          <input name="ref" maxlength="255" placeholder="main">
+        </label>
+        <button type="submit" id="start">Start analysis</button>
+        <p id="form-error" class="error" hidden></p>
+      </form>
+
+      <section class="card">
+        <h2>Recent runs</h2>
+        <ul id="runs" class="runs"></ul>
+        <p id="no-runs" class="muted" hidden>No runs yet.</p>
+      </section>
+    </aside>
+
+    <section class="main">
+      <div id="empty" class="card muted">
+        Start a run or pick one from the list to watch the agents work.
+      </div>
+
+      <div id="run" hidden>
+        <div class="card run-head">
+          <div>
+            <h2 id="run-title"></h2>
+            <p id="run-meta" class="muted"></p>
+          </div>
+          <span id="run-status" class="badge"></span>
+        </div>
+
+        <h3>Live agent feed</h3>
+        <div id="feed" class="feed"></div>
+
+        <h3>Report</h3>
+        <div id="report" class="card muted">Waiting for the agents to finish…</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
